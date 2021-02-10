@@ -3,8 +3,9 @@ import { Observable } from "rxjs";
 
 import { LoggingService } from "../logging.service";
 import { Store } from "@ngrx/store";
-import GlobalState, { ShoppingListState } from "./shopping-list.model";
 import { StartEdit } from "./store/shopping-list.actions";
+import ShoppingListState from "./shopping-list.model";
+import { RootState } from "../app.reducer";
 
 @Component({
   selector: "app-shopping-list",
@@ -16,7 +17,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   constructor(
     private loggingService: LoggingService,
-    private store: Store<GlobalState>
+    private store: Store<RootState>
   ) {}
 
   ngOnInit() {

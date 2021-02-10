@@ -1,5 +1,5 @@
 import { Ingredient } from "src/app/shared/ingredient.model";
-import { ShoppingListState } from "../shopping-list.model";
+import ShoppingListState from "../shopping-list.model";
 import {
   ADD_INGREDIENT,
   ADD_INGREDIENTS,

@@ -3,9 +3,9 @@ import { NgForm } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
 import { map } from "rxjs/operators";
+import { RootState } from "src/app/app.reducer";
 
 import { Ingredient } from "../../shared/ingredient.model";
-import GlobalState from "../shopping-list.model";
 import { AddIngredient, StopEdit } from "../store/shopping-list.actions";
 
 @Component({
@@ -19,7 +19,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editMode = false;
   editedItem: Ingredient;
 
-  constructor(private store: Store<GlobalState>) {}
+  constructor(private store: Store<RootState>) {}
 
   ngOnInit() {
     this.subscription = this.store
