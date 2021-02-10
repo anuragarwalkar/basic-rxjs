@@ -3,7 +3,6 @@ import { Subject } from "rxjs";
 
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
-import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import { Store } from "@ngrx/store";
 import GlobalState from "../shopping-list/shopping-list.model";
 import { AddIngredients } from "../shopping-list/store/shopping-list.actions";
