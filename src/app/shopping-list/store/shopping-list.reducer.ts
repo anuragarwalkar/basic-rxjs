@@ -1,9 +1,8 @@
 import { Ingredient } from "src/app/shared/ingredient.model";
+import { Ingredients } from "../shopping-list.model";
 import { AddIngredient, ADD_INGREDIENT } from "./shopping-list.actions";
 
-const inititalState: {
-  ingredients: Ingredient[];
-} = {
+const inititalState: Ingredients = {
   ingredients: [new Ingredient("Apples", 5), new Ingredient("Tomatoes", 10)],
 };
 
