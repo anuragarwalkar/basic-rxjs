@@ -5,7 +5,7 @@ import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import { Store } from "@ngrx/store";
-import ShoppingList from "../shopping-list/shopping-list.model";
+import GlobalState from "../shopping-list/shopping-list.model";
 import { AddIngredients } from "../shopping-list/store/shopping-list.actions";
 
 @Injectable()
@@ -13,10 +13,7 @@ export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [];
 
-  constructor(
-    private slService: ShoppingListService,
-    private store: Store<ShoppingList>
-  ) {}
+  constructor(private store: Store<GlobalState>) {}
 
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
