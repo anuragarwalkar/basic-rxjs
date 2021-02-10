@@ -42,6 +42,7 @@ export function shoppingListReducer(
       return {
         ...state,
         ingredients: clonedIngredients,
+        ...resetEditIngredient(),
       };
     }
     case DELETE_INGREDIENT: {
@@ -64,11 +65,14 @@ export function shoppingListReducer(
     case STOP_EDIT: {
       return {
         ...state,
-        editedIngredient: null,
-        editedIngredientIndex: -1,
+        ...resetEditIngredient(),
       };
     }
     default:
       return state;
   }
 }
+
+const resetEditIngredient = () => {
+  return { editedIngredient: null, editedIngredientIndex: -1 };
+};
