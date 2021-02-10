@@ -1,13 +1,18 @@
-import { Ingredient } from '../shared/ingredient.model';
-import { Subject } from 'rxjs';
+import { Ingredient } from "../shared/ingredient.model";
+import { Subject } from "rxjs";
+import { Store } from "@ngrx/store";
+import ShoppingList from "./shopping-list.model";
+import { UpdateIngredient } from "./store/shopping-list.actions";
 
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
   startedEditing = new Subject<number>();
   private ingredients: Ingredient[] = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10),
+    new Ingredient("Apples", 5),
+    new Ingredient("Tomatoes", 10),
   ];
+
+  constructor(private store: Store<ShoppingList>) {}
 
   getIngredients() {
     return this.ingredients.slice();
@@ -30,8 +35,10 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  updateIngredient(index: number, newIngredient: Ingredient) {
-    this.ingredients[index] = newIngredient;
+  updateIngredient(index: number, ingredient: Ingredient) {
+    const payload = { index, ingredient };
+    this.store.dispatch(new UpdateIngredient(payload));
+    this.ingredients[index] = ingredient;
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
