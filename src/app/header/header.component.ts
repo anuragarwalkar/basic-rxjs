@@ -16,9 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private dataStorageService: DataStorageService,
     private authService: AuthService
-  ) {
-    console.log("environment.firebaseAPIKey:", environment.firebaseAPIKey);
-  }
+  ) {}
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe((user) => {
