@@ -6,7 +6,6 @@ import { map } from "rxjs/operators";
 
 import { Ingredient } from "../../shared/ingredient.model";
 import GlobalState from "../shopping-list.model";
-import { ShoppingListService } from "../shopping-list.service";
 import { AddIngredient, StopEdit } from "../store/shopping-list.actions";
 
 @Component({
@@ -20,10 +19,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editMode = false;
   editedItem: Ingredient;
 
-  constructor(
-    private slService: ShoppingListService,
-    private store: Store<GlobalState>
-  ) {}
+  constructor(private store: Store<GlobalState>) {}
 
   ngOnInit() {
     this.subscription = this.store
@@ -48,7 +44,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const value = form.value;
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
-      this.slService.updateIngredient(newIngredient);
     } else {
       this.store.dispatch(new AddIngredient(newIngredient));
     }
@@ -63,7 +58,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.slService.deleteIngredient();
     this.onClear();
   }
 
