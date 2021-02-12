@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { RootState } from "./app.reducer";
 
-import { AuthService } from './auth/auth.service';
-import { LoggingService } from './logging.service';
+import { AuthService } from "./auth/auth.service";
+import { AutoLogin } from "./auth/store/auth.actions";
+import { LoggingService } from "./logging.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
   constructor(
-    private authService: AuthService,
+    private store: Store<RootState>,
     private loggingService: LoggingService
   ) {}
 
   ngOnInit() {
-    this.authService.autoLogin();
-    this.loggingService.printLog('Hello from AppComponent ngOnInit');
+    this.store.dispatch(new AutoLogin());
+    this.loggingService.printLog("Hello from AppComponent ngOnInit");
   }
 }

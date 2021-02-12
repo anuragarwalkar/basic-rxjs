@@ -1,6 +1,7 @@
 import { User } from "../user.model";
 import {
   AuthActions,
+  CLEAR_ERROR,
   LOGIN,
   LOGIN_FAIL,
   LOGIN_START,
@@ -39,6 +40,12 @@ export function authReducers(
         ...state,
         authError: action.payload.message,
         loading: false,
+      };
+    }
+    case CLEAR_ERROR: {
+      return {
+        ...state,
+        authError: null,
       };
     }
     default: {
