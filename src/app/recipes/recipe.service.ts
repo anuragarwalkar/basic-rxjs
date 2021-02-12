@@ -10,9 +10,6 @@ import { AddRecipe, DeleteRecipe, UpdateRecipe } from "./store/recipe.action";
 
 @Injectable()
 export class RecipeService {
-  recipesChanged = new Subject<Recipe[]>();
-  private recipes: Recipe[] = [];
-
   constructor(private store: Store<GlobalState>) {}
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
