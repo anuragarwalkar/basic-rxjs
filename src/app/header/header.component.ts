@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
-
-import { DataStorageService } from "../shared/data-storage.service";
-import { AuthService } from "../auth/auth.service";
-import { RootState } from "../app.reducer";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { Subscription } from "rxjs";
 import { map } from "rxjs/operators";
+import { RootState } from "../app.reducer";
 import { Logout } from "../auth/store/auth.actions";
 import {
   FetchRecipesStart,
@@ -20,10 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private userSub: Subscription;
 
-  constructor(
-    private dataStorageService: DataStorageService,
-    private store: Store<RootState>
-  ) {}
+  constructor(private store: Store<RootState>) {}
 
   ngOnInit() {
     this.userSub = this.store
