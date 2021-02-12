@@ -1,61 +1,57 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { Recipe } from '../recipe.model';
-import * as RecipesActions from '../store/recipe.actions';
+// import { Action, createReducer, on } from '@ngrx/store';
+// import { Recipe } from '../recipe.model';
+// import * as RecipesActions from '../store/recipe.actions';
 
+// export interface State {
+//   recipes: Recipe[];
+// }
 
-export interface State {
-  recipes: Recipe[];
-}
+// const initialState: State = {
+//   recipes: []
+// };
 
+// const _recipeReducer = createReducer(
 
-const initialState: State = {
-  recipes: []
-};
+//   initialState,
 
+//   on(
+//     RecipesActions.addRecipe,
+//     (state, action) => ({
+//       ...state,
+//       recipes: state.recipes.concat({ ...action.recipe })
+//     })
+//   ),
 
-const _recipeReducer = createReducer(
+//   on(
+//     RecipesActions.updateRecipe,
+//     (state, action) => ({
+//       ...state,
+//       recipes: state.recipes.map(
+//         (recipe, index) => index === action.index ? { ...action.recipe } : recipe
+//       )
+//     })
+//   ),
 
-  initialState,
+//   on(
+//     RecipesActions.deleteRecipe,
+//     (state, action) => ({
+//       ...state,
+//       recipes: state.recipes.filter(
+//         (_, index) => index !== action.index
+//       )
+//     })
+//   ),
 
-  on(
-    RecipesActions.addRecipe,
-    (state, action) => ({
-      ...state,
-      recipes: state.recipes.concat({ ...action.recipe })
-    })
-  ),
+//   on(
+//     RecipesActions.setRecipes,
+//     (state, action) => ({
+//       ...state,
+//       recipes: [ ...action.recipes ]
+//     })
+//   )
 
-  on(
-    RecipesActions.updateRecipe,
-    (state, action) => ({
-      ...state,
-      recipes: state.recipes.map(
-        (recipe, index) => index === action.index ? { ...action.recipe } : recipe
-      )
-    })
-  ),
+// );
 
-  on(
-    RecipesActions.deleteRecipe,
-    (state, action) => ({
-      ...state,
-      recipes: state.recipes.filter(
-        (_, index) => index !== action.index
-      )
-    })
-  ),
-
-  on(
-    RecipesActions.setRecipes,
-    (state, action) => ({
-      ...state,
-      recipes: [ ...action.recipes ]
-    })
-  )
-
-);
-
-
-export function recipeReducer(state: State, action: Action) {
-  return _recipeReducer(state, action);
-}
+// export function recipeReducer(state: State, action: Action) {
+//   return _recipeReducer(state, action);
+// }

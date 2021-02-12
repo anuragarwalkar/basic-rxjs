@@ -31,23 +31,28 @@ export class RecipeEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.pipe(
-      map((params: Params) => {
-        this.id = +params["id"];
-        this.editMode = params["id"] != null;
-      }),
-      switchMap(() => {
-        return this.store.select("recipe");
-      }),
-      map((recipeState: RecipeState) => {
-        const recipe = recipeState.recipes.find(
-          (iRecipe: Recipe, index: number) => {
-            return index === this.id;
+    this.route.params
+      .pipe(
+        map((params: Params) => {
+          this.editMode = params.id !== undefined;
+          this.id = +params.id;
+        }),
+        switchMap(() => {
+          return this.store.select("recipe");
+        }),
+        map((recipeState: RecipeState) => {
+          if (recipeState.recipes) {
+            const recipe = recipeState.recipes.find(
+              (iRecipe: Recipe, index: number) => {
+                return index === this.id;
+              }
+            );
+            this.initForm(recipe ? recipe : null);
           }
-        );
-        this.initForm(recipe ? recipe : null);
-      })
-    );
+        })
+      )
+      .subscribe();
+    this.initForm();
   }
 
   onSubmit() {

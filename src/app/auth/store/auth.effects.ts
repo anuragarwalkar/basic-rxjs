@@ -88,8 +88,8 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(LOGIN),
-        tap((authData: LoginPayload) => {
-          if (authData.redirect) {
+        tap((authData: { payload: LoginPayload }) => {
+          if (authData.payload.redirect) {
             this.router.navigate(["/"]);
           }
         })

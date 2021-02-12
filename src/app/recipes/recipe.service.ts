@@ -6,6 +6,7 @@ import { Ingredient } from "../shared/ingredient.model";
 import { Store } from "@ngrx/store";
 import GlobalState from "../shopping-list/shopping-list.model";
 import { AddIngredients } from "../shopping-list/store/shopping-list.actions";
+import { AddRecipe, DeleteRecipe, UpdateRecipe } from "./store/recipe.action";
 
 @Injectable()
 export class RecipeService {
@@ -14,27 +15,19 @@ export class RecipeService {
 
   constructor(private store: Store<GlobalState>) {}
 
-  setRecipes(recipes: Recipe[]) {
-    this.recipes = recipes;
-    this.recipesChanged.next(this.recipes.slice());
-  }
-
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.store.dispatch(new AddIngredients(ingredients));
   }
 
   addRecipe(recipe: Recipe) {
-    this.recipes.push(recipe);
-    this.recipesChanged.next(this.recipes.slice());
+    this.store.dispatch(new AddRecipe({ recipe }));
   }
 
-  updateRecipe(index: number, newRecipe: Recipe) {
-    this.recipes[index] = newRecipe;
-    this.recipesChanged.next(this.recipes.slice());
+  updateRecipe(index: number, recipe: Recipe) {
+    this.store.dispatch(new UpdateRecipe({ index, recipe }));
   }
 
   deleteRecipe(index: number) {
-    this.recipes.splice(index, 1);
-    this.recipesChanged.next(this.recipes.slice());
+    this.store.dispatch(new DeleteRecipe({ index }));
   }
 }

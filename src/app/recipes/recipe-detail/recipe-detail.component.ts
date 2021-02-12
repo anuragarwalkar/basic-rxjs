@@ -28,6 +28,7 @@ export class RecipeDetailComponent implements OnInit {
     this.route.params
       .pipe(
         map((params: Params) => {
+          console.log("params:", params);
           this.id = +params["id"];
         }),
         switchMap(() => {
