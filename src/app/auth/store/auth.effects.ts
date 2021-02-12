@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Actions, Effect, ofType } from "@ngrx/effects";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, switchMap, map, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import AuthResponseData from "../authResponseData.model";
@@ -59,8 +59,8 @@ const handleError = (errorRes: HttpErrorResponse) => {
 };
 @Injectable()
 export class AuthEffects {
-  @Effect()
-  authLogin = this.actions$.pipe(
+  
+  authLogin = createEffect(() => this.actions$.pipe(
     ofType(LOGIN_START),
     switchMap((authData: LoginStart) => {
       const { firebaseSignin, firebaseAPIKey } = environment;
@@ -79,18 +79,18 @@ export class AuthEffects {
           catchError(handleError)
         );
     })
-  );
+  ));
 
-  @Effect({ dispatch: false })
-  authSuccess = this.actions$.pipe(
+  
+  authSuccess = createEffect(() => this.actions$.pipe(
     ofType(LOGIN),
     tap(() => {
       this.router.navigate(["/"]);
     })
-  );
+  ), { dispatch: false });
 
-  @Effect()
-  authSignup = this.actions$.pipe(
+  
+  authSignup = createEffect(() => this.actions$.pipe(
     ofType(SIGNUP_START),
     switchMap((authData: SignupStart) => {
       const { email, password } = authData.payload;
@@ -110,20 +110,20 @@ export class AuthEffects {
         );
     }),
     catchError(handleError)
-  );
+  ));
 
-  @Effect({ dispatch: false })
-  autoLogout = this.actions$.pipe(
+  
+  autoLogout = createEffect(() => this.actions$.pipe(
     ofType(LOGOUT),
     tap(() => {
       localStorage.removeItem("userData");
       this.authService.clearLogoutTimer();
       this.router.navigate(["/auth"]);
     })
-  );
+  ), { dispatch: false });
 
-  @Effect()
-  autoLogin = this.actions$.pipe(
+  
+  autoLogin = createEffect(() => this.actions$.pipe(
     ofType(AUTO_LOGIN),
     map(() => {
       const userData: {
@@ -158,7 +158,7 @@ export class AuthEffects {
 
       return { type: "dummy" };
     })
-  );
+  ));
   constructor(
     private actions$: Actions,
     private http: HttpClient,
