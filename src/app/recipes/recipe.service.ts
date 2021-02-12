@@ -19,14 +19,6 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  getRecipes() {
-    return this.recipes.slice();
-  }
-
-  getRecipe(index: number) {
-    return this.recipes[index];
-  }
-
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.store.dispatch(new AddIngredients(ingredients));
   }

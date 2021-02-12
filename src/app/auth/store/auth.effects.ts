@@ -19,6 +19,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { User } from "../user.model";
 import { AuthService } from "../auth.service";
+import LoginPayload from "./models/loginPayload.model";
 
 const handlerLogin = (resData) => {
   const {
@@ -36,6 +37,7 @@ const handlerLogin = (resData) => {
     expirationDate,
     email: resEmail,
     token,
+    redirect: true,
   });
 };
 
@@ -86,8 +88,10 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(LOGIN),
-        tap(() => {
-          this.router.navigate(["/"]);
+        tap((authData: LoginPayload) => {
+          if (authData.redirect) {
+            this.router.navigate(["/"]);
+          }
         })
       ),
     { dispatch: false }
@@ -155,12 +159,13 @@ export class AuthEffects {
           const expirationDuration =
             new Date(userData._tokenExpirationDate).getTime() -
             new Date().getTime();
-          this.authService.autoLogout(expirationDuration);
+          // this.authService.autoLogout(expirationDuration);
           return new Login({
             email: loadedUser.email,
             userId: loadedUser.id,
             token: loadedUser.token,
             expirationDate: new Date(userData._tokenExpirationDate),
+            redirect: false,
           });
         }
 

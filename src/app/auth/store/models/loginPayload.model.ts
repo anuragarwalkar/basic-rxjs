@@ -3,4 +3,5 @@ export default interface LoginPayload {
   userId: string;
   token: string;
   expirationDate: Date;
+  redirect: boolean;
 }
