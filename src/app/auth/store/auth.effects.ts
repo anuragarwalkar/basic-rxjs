@@ -65,8 +65,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(LOGIN_START),
       switchMap((authData: LoginStart) => {
-        const { firebaseSignin, firebaseAPIKey } = environment;
-        const url = `${firebaseSignin}${firebaseAPIKey}`;
+        const { firebaseAuth, firebaseAPIKey } = environment;
+        const url = `${firebaseAuth}/verifyPassword?key=${firebaseAPIKey}`;
         return this.http
           .post<AuthResponseData>(url, {
             email: authData.payload.email,
@@ -102,8 +102,8 @@ export class AuthEffects {
       ofType(SIGNUP_START),
       switchMap((authData: SignupStart) => {
         const { email, password } = authData.payload;
-        const { firebaseSignup, firebaseAPIKey } = environment;
-        const url = `${firebaseSignup}${firebaseAPIKey}`;
+        const { firebaseAuth, firebaseAPIKey } = environment;
+        const url = `${firebaseAuth}/signupNewUser?key=${firebaseAPIKey}`;
         return this.http
           .post<AuthResponseData>(url, {
             email,

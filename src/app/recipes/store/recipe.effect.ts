@@ -19,10 +19,7 @@ export class RecipeEffects {
       ofType(SAVE_RECIPES_START),
       withLatestFrom(this.store.select("recipe")),
       switchMap(([actionData, recipesData]) => {
-        return this.http.put<Recipe[]>(
-          "https://ng-rx-basic-default-rtdb.firebaseio.com/recipes.json",
-          recipesData.recipes
-        );
+        return this.http.put<Recipe[]>("/recipes.json", recipesData.recipes);
       }),
       map((res) => {
         return new SaveRecipes({ recipes: res });

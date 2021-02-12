@@ -5,10 +5,8 @@
 export const environment = {
   production: false,
   firebaseAPIKey: "",
-  firebaseSignup:
-    "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=",
-  firebaseSignin:
-    "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=",
+  firebaseAPI: "https://ng-rx-basic-default-rtdb.firebaseio.com",
+  firebaseAuth: "https://www.googleapis.com/identitytoolkit/v3/relyingparty",
 };
 
 /*
