@@ -9,16 +9,4 @@ import { AuthService } from "../auth/auth.service";
 @Injectable({ providedIn: "root" })
 export class DataStorageService {
   constructor(private http: HttpClient) {}
-
-  storeRecipes() {
-    const recipes = [];
-    this.http
-      .put(
-        "https://ng-rx-basic-default-rtdb.firebaseio.com/recipes.json",
-        recipes
-      )
-      .subscribe((response) => {
-        console.log(response);
-      });
-  }
 }

@@ -21,17 +21,13 @@ export class RecipesResolverService implements Resolve<Recipe[]> {
   constructor(private store: Store<RootState>, private actions$: Actions) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log("as", "asd");
     return this.store.select("recipe").pipe(
       take(1),
       map((recipeState) => {
-        console.log("recipeState:", recipeState);
         return recipeState.recipes;
       }),
       switchMap((recipes: Recipe[]) => {
-        console.log("recipes:", recipes);
         if (recipes && recipes.length === 0) {
-          debugger;
           this.store.dispatch(new FetchRecipesStart());
           return this.actions$.pipe(ofType(FETCH_RECIPES_SUCCESS), take(1));
         } else {

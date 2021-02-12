@@ -7,7 +7,10 @@ import { RootState } from "../app.reducer";
 import { Store } from "@ngrx/store";
 import { map } from "rxjs/operators";
 import { Logout } from "../auth/store/auth.actions";
-import { FetchRecipesStart } from "../recipes/store/recipe.action";
+import {
+  FetchRecipesStart,
+  SaveRecipesStart,
+} from "../recipes/store/recipe.action";
 
 @Component({
   selector: "app-header",
@@ -32,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes();
+    this.store.dispatch(new SaveRecipesStart());
   }
 
   onFetchData() {

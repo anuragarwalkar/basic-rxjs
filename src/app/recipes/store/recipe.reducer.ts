@@ -27,7 +27,6 @@ export default function recipeReducer(
 
     case ADD_RECIPE: {
       const { recipe } = action.payload;
-      debugger;
       const newState = {
         ...state,
         recipes: state.recipes ? [...state.recipes, recipe] : [recipe],
